@@ -1,14 +1,5 @@
-/**
- * @author Titus Wormer
- * @copyright 2016 Titus Wormer
- * @license MIT
- * @module vfile-reporter-json
- * @fileoverview Test suite for `vfile-reporter-json`.
- */
-
 'use strict';
 
-/* Dependencies. */
 var test = require('tape');
 var vfile = require('vfile');
 var reporter = require('./index.js');

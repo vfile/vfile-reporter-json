@@ -3,8 +3,7 @@
 /* Expose. */
 module.exports = reporter;
 
-/* Report one or more files.
- */
+/* Report one or more files. */
 function reporter(files, options) {
   var settings = options || {};
   var subset = applicableFiles('length' in files ? files : [files], settings);
