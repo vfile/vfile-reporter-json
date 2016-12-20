@@ -10,8 +10,8 @@
     "format",
     "json"
   ],
-  "repository": "https://github.com/wooorm/vfile-reporter-json",
-  "bugs": "https://github.com/wooorm/vfile-reporter-json/issues",
+  "repository": "https://github.com/vfile/vfile-reporter-json",
+  "bugs": "https://github.com/vfile/vfile-reporter-json/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"

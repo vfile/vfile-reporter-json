@@ -58,13 +58,13 @@ Generate **stringified** JSON for `files`.
 
 <!-- Definitions -->
 
-[travis-badge]: https://img.shields.io/travis/wooorm/vfile-reporter-json.svg
+[travis-badge]: https://img.shields.io/travis/vfile/vfile-reporter-json.svg
 
-[travis]: https://travis-ci.org/wooorm/vfile-reporter-json
+[travis]: https://travis-ci.org/vfile/vfile-reporter-json
 
-[codecov-badge]: https://img.shields.io/codecov/c/github/wooorm/vfile-reporter-json.svg
+[codecov-badge]: https://img.shields.io/codecov/c/github/vfile/vfile-reporter-json.svg
 
-[codecov]: https://codecov.io/github/wooorm/vfile-reporter-json
+[codecov]: https://codecov.io/github/vfile/vfile-reporter-json
 
 [npm]: https://docs.npmjs.com/cli/install
 
@@ -72,6 +72,6 @@ Generate **stringified** JSON for `files`.
 
 [author]: http://wooorm.com
 
-[vfile]: https://github.com/wooorm/vfile
+[vfile]: https://github.com/vfile/vfile
 
 [json-stringify]: https://developer.mozilla.org/JavaScript/Reference/Global_Objects/JSON/stringify
