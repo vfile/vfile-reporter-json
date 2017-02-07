@@ -32,7 +32,7 @@
   },
   "scripts": {
     "build-md": "remark . -qfo",
-    "build-bundle": "browserify index.js --bare -s vfileReporter > vfile-reporter-json.js",
+    "build-bundle": "browserify index.js --bare -s vfileReporterJSON > vfile-reporter-json.js",
     "build-mangle": "esmangle vfile-reporter-json.js > vfile-reporter-json.min.js",
     "build": "npm run build-md && npm run build-bundle && npm run build-mangle",
     "lint": "xo",
