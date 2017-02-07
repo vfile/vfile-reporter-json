@@ -1,9 +1,7 @@
 'use strict';
 
-/* Expose. */
 module.exports = reporter;
 
-/* Report one or more files. */
 function reporter(files, options) {
   var settings = options || {};
   var subset = applicableFiles('length' in files ? files : [files], settings);
@@ -51,7 +49,6 @@ function messagesToJSON(messages) {
 }
 
 function messageToJSON(message) {
-  // console.log('m: ', message);
   return {
     reason: message.reason,
     line: message.line,

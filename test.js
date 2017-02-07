@@ -6,7 +6,6 @@ var reporter = require('./index.js');
 
 var cwd = process.cwd();
 
-/* Tests. */
 test('vfile-reporter-json', function (t) {
   var file;
 
