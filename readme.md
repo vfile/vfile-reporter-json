@@ -1,6 +1,6 @@
 # vfile-reporter-json [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
 
-Format [**vfile**][vfile]s as **stringified** JSON.
+Format [`vfile`][vfile]s as **stringified** JSON.
 
 ## Installation
 
@@ -11,8 +11,6 @@ npm install vfile-reporter-json
 ```
 
 ## Usage
-
-Dependencies:
 
 ```javascript
 var vfile = require('vfile');
@@ -36,21 +34,26 @@ Yields:
 
 ### `reporter(files[, options])`
 
-Generate **stringified** JSON for `files`.
+Generate **stringified** JSON for `files` ([`VFile`][vfile] or `Array.<VFile>`).
 
-###### Parameters
+##### `options`
 
-*   `files` ([`VFile`][vfile] or `Array.<VFile>`).
-*   `options` (`object`, optional):
-    *   `quiet` (`boolean`, default: `false`)
-        — Do not output anything for a file which has no warnings or
-        errors.  The default behaviour is to show a success message.
-    *   `silent` (`boolean`, default: `false`)
-        — Do not output messages without `fatal` set to true.
-        Also sets `quiet` to `true`.
-    *   `pretty` (`boolean`, `number`, or `string`, default: `0`)
-        — When `true`, defaults to `2`.
-        Given as `space` to [`JSON.stringify()`][json-stringify].
+Optional object.
+
+###### `options.quiet`
+
+Do not output anything for a file which has no warnings or errors (`boolean`,
+default: `false`).  The default behaviour is to show a success message.
+
+###### `options.silent`
+
+Do not output messages without `fatal` set to true (`boolean`, default:
+`false`).  Also sets `quiet` to `true`.
+
+###### `options.pretty`
+
+Given as `space` to [`JSON.stringify()`][json-stringify] (`boolean`, `number`,
+or `string`, default: `0`).  When `true`, defaults to `2`.
 
 ## License
 
