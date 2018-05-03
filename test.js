@@ -2,7 +2,7 @@
 
 var test = require('tape');
 var vfile = require('vfile');
-var reporter = require('./index.js');
+var reporter = require('.');
 
 var cwd = process.cwd();
 
