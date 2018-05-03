@@ -13,15 +13,15 @@ npm install vfile-reporter-json
 ## Usage
 
 ```javascript
-var vfile = require('vfile');
-var reporter = require('vfile-reporter-json');
+var vfile = require('vfile')
+var reporter = require('vfile-reporter-json')
 
-var one = vfile({path: 'test/fixture/1.js'});
-var two = vfile({path: 'test/fixture/2.js'});
+var one = vfile({path: 'test/fixture/1.js'})
+var two = vfile({path: 'test/fixture/2.js'})
 
-one.message('Warning!', {line: 2, column: 4});
+one.message('Warning!', {line: 2, column: 4})
 
-var report = reporter([one, two]);
+console.log(reporter([one, two]))
 ```
 
 Yields:
