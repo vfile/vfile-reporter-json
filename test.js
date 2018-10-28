@@ -138,7 +138,7 @@ test('vfile-reporter-json', function(t) {
 
   try {
     file.fail('Error!')
-  } catch (err) {}
+  } catch (error) {}
 
   t.equal(
     reporter(file, {quiet: true}),
@@ -198,7 +198,7 @@ test('vfile-reporter-json', function(t) {
 
   try {
     file.fail('Error!')
-  } catch (err) {}
+  } catch (error) {}
 
   t.equal(
     reporter(file),
@@ -309,7 +309,7 @@ test('vfile-reporter-json', function(t) {
   file = vfile({path: 'a.js'})
   try {
     file.fail('Error!')
-  } catch (err) {}
+  } catch (error) {}
 
   t.equal(
     reporter([file]),
