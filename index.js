@@ -82,7 +82,7 @@ function applicableFiles(files, options) {
   return result
 }
 
-/* Get applicable messages. */
+// Get applicable messages.
 function applicableMessages(messages, options) {
   var length = messages.length
   var index = -1
