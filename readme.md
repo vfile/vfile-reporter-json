@@ -1,4 +1,9 @@
-# vfile-reporter-json [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
+# vfile-reporter-json
+
+[![Build][build-badge]][build]
+[![Coverage][coverage-badge]][coverage]
+[![Downloads][downloads-badge]][downloads]
+[![Chat][chat-badge]][chat]
 
 Format [`vfile`][vfile]s as **stringified** JSON.
 
@@ -68,13 +73,21 @@ repository, organisation, or community you agree to abide by its terms.
 
 <!-- Definitions -->
 
-[travis-badge]: https://img.shields.io/travis/vfile/vfile-reporter-json.svg
+[build-badge]: https://img.shields.io/travis/vfile/vfile-reporter-json.svg
 
-[travis]: https://travis-ci.org/vfile/vfile-reporter-json
+[build]: https://travis-ci.org/vfile/vfile-reporter-json
 
-[codecov-badge]: https://img.shields.io/codecov/c/github/vfile/vfile-reporter-json.svg
+[coverage-badge]: https://img.shields.io/codecov/c/github/vfile/vfile-reporter-json.svg
 
-[codecov]: https://codecov.io/github/vfile/vfile-reporter-json
+[coverage]: https://codecov.io/github/vfile/vfile-reporter-json
+
+[downloads-badge]: https://img.shields.io/npm/dm/vfile-reporter-json.svg
+
+[downloads]: https://www.npmjs.com/package/vfile-reporter-json
+
+[chat-badge]: https://img.shields.io/badge/join%20the%20community-on%20spectrum-7b16ff.svg
+
+[chat]: https://spectrum.chat/unified/vfile
 
 [npm]: https://docs.npmjs.com/cli/install
 
