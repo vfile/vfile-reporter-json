@@ -1,6 +1,6 @@
 {
   "name": "vfile-reporter-json",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "description": "JSON reporter for virtual files",
   "license": "MIT",
   "keywords": [
