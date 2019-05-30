@@ -99,7 +99,7 @@ test('vfile-reporter-json', function(t) {
     'should support `silent: true` on successful files'
   )
 
-  file.warn('Warning!')
+  file.message('Warning!')
 
   t.equal(
     reporter(file, {quiet: true}),
