@@ -3,21 +3,23 @@
 [![Build][build-badge]][build]
 [![Coverage][coverage-badge]][coverage]
 [![Downloads][downloads-badge]][downloads]
+[![Sponsors][sponsors-badge]][collective]
+[![Backers][backers-badge]][collective]
 [![Chat][chat-badge]][chat]
 
 Format [`vfile`][vfile]s as **stringified** JSON.
 
-## Installation
+## Install
 
 [npm][]:
 
-```bash
+```sh
 npm install vfile-reporter-json
 ```
 
 ## Usage
 
-```javascript
+```js
 var vfile = require('vfile')
 var reporter = require('vfile-reporter-json')
 
@@ -41,31 +43,33 @@ Yields:
 
 Generate **stringified** JSON for `files` ([`VFile`][vfile] or `Array.<VFile>`).
 
-##### `options`
-
-Optional object.
-
 ###### `options.quiet`
 
 Do not output anything for a file which has no warnings or errors (`boolean`,
-default: `false`).  The default behaviour is to show a success message.
+default: `false`).
+The default behaviour is to show a success message.
 
 ###### `options.silent`
 
 Do not output messages without `fatal` set to true (`boolean`, default:
-`false`).  Also sets `quiet` to `true`.
+`false`).
+Also sets `quiet` to `true`.
 
 ###### `options.pretty`
 
 Given as `space` to [`JSON.stringify()`][json-stringify] (`boolean`, `number`,
-or `string`, default: `0`).  When `true`, defaults to `2`.
+or `string`, default: `0`).
+When `true`, defaults to `2`.
 
 ## Contribute
 
-See [`contributing.md` in `vfile/vfile`][contributing] for ways to get started.
+See [`contributing.md`][contributing] in [`vfile/.github`][health] for ways to
+get started.
+See [`support.md`][support] for ways to get help.
 
-This organisation has a [Code of Conduct][coc].  By interacting with this
-repository, organisation, or community you agree to abide by its terms.
+This project has a [Code of Conduct][coc].
+By interacting with this repository, organisation, or community you agree to
+abide by its terms.
 
 ## License
 
@@ -85,11 +89,25 @@ repository, organisation, or community you agree to abide by its terms.
 
 [downloads]: https://www.npmjs.com/package/vfile-reporter-json
 
+[sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
+
+[backers-badge]: https://opencollective.com/unified/backers/badge.svg
+
+[collective]: https://opencollective.com/unified
+
 [chat-badge]: https://img.shields.io/badge/join%20the%20community-on%20spectrum-7b16ff.svg
 
 [chat]: https://spectrum.chat/unified/vfile
 
 [npm]: https://docs.npmjs.com/cli/install
+
+[contributing]: https://github.com/vfile/.github/blob/master/contributing.md
+
+[support]: https://github.com/vfile/.github/blob/master/support.md
+
+[health]: https://github.com/vfile/.github
+
+[coc]: https://github.com/vfile/.github/blob/master/code-of-conduct.md
 
 [license]: license
 
@@ -98,7 +116,3 @@ repository, organisation, or community you agree to abide by its terms.
 [vfile]: https://github.com/vfile/vfile
 
 [json-stringify]: https://developer.mozilla.org/JavaScript/Reference/Global_Objects/JSON/stringify
-
-[contributing]: https://github.com/vfile/vfile/blob/master/contributing.md
-
-[coc]: https://github.com/vfile/vfile/blob/master/code-of-conduct.md
