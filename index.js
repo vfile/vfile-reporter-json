@@ -29,7 +29,7 @@ function filesToJSON(files, options) {
 
 function fileToJSON(file, options) {
   return {
-    path: current(file),
+    path: file.path,
     cwd: file.cwd,
     history: file.history,
     messages: messagesToJSON(applicableMessages(file.messages, options))
@@ -99,13 +99,4 @@ function applicableMessages(messages, options) {
   }
 
   return result
-}
-
-function current(file) {
-  /* istanbul ignore if - Previous `vfile` version. */
-  if (file.filePath) {
-    return file.filePath()
-  }
-
-  return file.path
 }
