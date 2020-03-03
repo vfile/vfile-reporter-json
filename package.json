@@ -1,13 +1,20 @@
 {
   "name": "vfile-reporter-json",
   "version": "2.0.0",
-  "description": "JSON reporter for virtual files",
+  "description": "vfile utility to create a JSON report for a file",
   "license": "MIT",
   "keywords": [
     "vfile",
-    "formatter",
+    "vfile-util",
+    "vfile-reporter",
+    "util",
+    "utility",
     "reporter",
+    "virtual",
+    "file",
+    "formatter",
     "format",
+    "report",
     "json"
   ],
   "repository": "vfile/vfile-reporter-json",
