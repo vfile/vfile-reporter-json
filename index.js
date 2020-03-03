@@ -5,7 +5,7 @@ module.exports = reporter
 function reporter(files, options) {
   var settings = options || {}
   var subset = applicableFiles('length' in files ? files : [files], settings)
-  var data = filesToJSON(subset, settings)
+  var data = filesToJson(subset, settings)
   var pretty = settings.pretty || 0
 
   if (typeof pretty !== 'string' && typeof pretty !== 'number') {
@@ -15,40 +15,40 @@ function reporter(files, options) {
   return JSON.stringify(data, null, pretty)
 }
 
-function filesToJSON(files, options) {
+function filesToJson(files, options) {
   var length = files.length
   var index = -1
   var result = []
 
   while (++index < length) {
-    result[index] = fileToJSON(files[index], options)
+    result[index] = fileToJson(files[index], options)
   }
 
   return result
 }
 
-function fileToJSON(file, options) {
+function fileToJson(file, options) {
   return {
     path: file.path,
     cwd: file.cwd,
     history: file.history,
-    messages: messagesToJSON(applicableMessages(file.messages, options))
+    messages: messagesToJson(applicableMessages(file.messages, options))
   }
 }
 
-function messagesToJSON(messages) {
+function messagesToJson(messages) {
   var length = messages.length
   var index = -1
   var result = []
 
   while (++index < length) {
-    result[index] = messageToJSON(messages[index])
+    result[index] = messageToJson(messages[index])
   }
 
   return result
 }
 
-function messageToJSON(message) {
+function messageToJson(message) {
   return {
     reason: message.reason,
     line: message.line,
