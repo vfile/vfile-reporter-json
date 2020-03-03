@@ -17,7 +17,7 @@ Format [`vfile`][vfile]s as **stringified** JSON.
 npm install vfile-reporter-json
 ```
 
-## Usage
+## Use
 
 ```js
 var vfile = require('vfile')
@@ -47,7 +47,7 @@ Generate **stringified** JSON for `files` ([`VFile`][vfile] or `Array.<VFile>`).
 
 Do not output anything for a file which has no warnings or errors (`boolean`,
 default: `false`).
-The default behaviour is to show a success message.
+The default behavior is to show a success message.
 
 ###### `options.silent`
 
@@ -67,8 +67,8 @@ See [`contributing.md`][contributing] in [`vfile/.github`][health] for ways to
 get started.
 See [`support.md`][support] for ways to get help.
 
-This project has a [Code of Conduct][coc].
-By interacting with this repository, organisation, or community you agree to
+This project has a [code of conduct][coc].
+By interacting with this repository, organization, or community you agree to
 abide by its terms.
 
 ## License
@@ -95,7 +95,7 @@ abide by its terms.
 
 [collective]: https://opencollective.com/unified
 
-[chat-badge]: https://img.shields.io/badge/join%20the%20community-on%20spectrum-7b16ff.svg
+[chat-badge]: https://img.shields.io/badge/chat-spectrum-7b16ff.svg
 
 [chat]: https://spectrum.chat/unified/vfile
 
