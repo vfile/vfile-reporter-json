@@ -12,6 +12,10 @@
   ],
   "repository": "vfile/vfile-reporter-json",
   "bugs": "https://github.com/vfile/vfile-reporter-json/issues",
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/unified"
+  },
   "author": "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
