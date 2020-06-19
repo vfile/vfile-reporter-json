@@ -6,11 +6,11 @@ var reporter = require('.')
 
 var cwd = process.cwd()
 
-test('vfile-reporter-json', function(t) {
+test('vfile-reporter-json', function (t) {
   var file
 
   t.throws(
-    function() {
+    function () {
       reporter()
     },
     /^TypeError: Cannot use 'in' operator to search for 'length' in undefined$/,
