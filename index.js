@@ -4,77 +4,28 @@ module.exports = reporter
 
 function reporter(files, options) {
   var settings = options || {}
-  var subset = applicableFiles('length' in files ? files : [files], settings)
-  var data = filesToJson(subset, settings)
   var pretty = settings.pretty || 0
+  var data = filesToJson('length' in files ? files : [files], settings)
 
-  if (typeof pretty !== 'string' && typeof pretty !== 'number') {
-    pretty = 2
-  }
-
-  return JSON.stringify(data, null, pretty)
+  return JSON.stringify(data, null, pretty === true ? 2 : pretty)
 }
 
 function filesToJson(files, options) {
-  var length = files.length
   var index = -1
   var result = []
-
-  while (++index < length) {
-    result[index] = fileToJson(files[index], options)
-  }
-
-  return result
-}
-
-function fileToJson(file, options) {
-  return {
-    path: file.path,
-    cwd: file.cwd,
-    history: file.history,
-    messages: messagesToJson(applicableMessages(file.messages, options))
-  }
-}
-
-function messagesToJson(messages) {
-  var length = messages.length
-  var index = -1
-  var result = []
-
-  while (++index < length) {
-    result[index] = messageToJson(messages[index])
-  }
-
-  return result
-}
-
-function messageToJson(message) {
-  return {
-    reason: message.reason,
-    line: message.line,
-    column: message.column,
-    location: message.location,
-    ruleId: message.ruleId || null,
-    source: message.source || null,
-    fatal: message.fatal,
-    stack: message.stack || null
-  }
-}
-
-function applicableFiles(files, options) {
-  var result = []
-  var length = files.length
-  var index = -1
   var file
 
-  if (!options.quiet && !options.silent) {
-    return files.concat()
-  }
-
-  while (++index < length) {
+  while (++index < files.length) {
     file = files[index]
 
-    if (applicableMessages(file.messages, options).length > 0) {
+    file = {
+      path: file.path,
+      cwd: file.cwd,
+      history: file.history,
+      messages: messagesToJson(file.messages, options)
+    }
+
+    if ((!options.quiet && !options.silent) || file.messages.length > 0) {
       result.push(file)
     }
   }
@@ -82,20 +33,28 @@ function applicableFiles(files, options) {
   return result
 }
 
-// Get applicable messages.
-function applicableMessages(messages, options) {
-  var length = messages.length
+function messagesToJson(messages, options) {
   var index = -1
   var result = []
+  var message
 
-  if (options.silent) {
-    while (++index < length) {
-      if (messages[index].fatal) {
-        result.push(messages[index])
-      }
+  while (++index < messages.length) {
+    message = messages[index]
+
+    message = {
+      reason: message.reason,
+      line: message.line,
+      column: message.column,
+      location: message.location,
+      ruleId: message.ruleId || null,
+      source: message.source || null,
+      fatal: message.fatal,
+      stack: message.stack || null
     }
-  } else {
-    result = messages.concat()
+
+    if (!options.silent || message.fatal) {
+      result.push(message)
+    }
   }
 
   return result
