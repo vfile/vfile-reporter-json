@@ -74,7 +74,7 @@ function applicableFiles(files, options) {
   while (++index < length) {
     file = files[index]
 
-    if (applicableMessages(file.messages, options).length !== 0) {
+    if (applicableMessages(file.messages, options).length > 0) {
       result.push(file)
     }
   }
