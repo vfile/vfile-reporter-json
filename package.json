@@ -1,6 +1,6 @@
 {
   "name": "vfile-reporter-json",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "vfile utility to create a JSON report for a file",
   "license": "MIT",
   "keywords": [
