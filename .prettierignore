@@ -1,5 +1,2 @@
 coverage/
-vfile-reporter-json.js
-vfile-reporter-json.min.js
-*.json
 *.md

@@ -11,6 +11,9 @@ Format [`vfile`][vfile]s as **stringified** JSON.
 
 ## Install
 
+This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):
+Node 12+ is needed to use it and it must be `import`ed instead of `require`d.
+
 [npm][]:
 
 ```sh
@@ -20,24 +23,27 @@ npm install vfile-reporter-json
 ## Use
 
 ```js
-var vfile = require('vfile')
-var reporter = require('vfile-reporter-json')
+import {VFile} from 'vfile'
+import {reporterJson} from 'vfile-reporter-json'
 
-var one = vfile({path: 'test/fixture/1.js'})
-var two = vfile({path: 'test/fixture/2.js'})
+var one = new VFile({path: 'test/fixture/1.js'})
+var two = new VFile({path: 'test/fixture/2.js'})
 
 one.message('Warning!', {line: 2, column: 4})
 
-console.log(reporter([one, two]))
+console.log(reporterJson([one, two]))
 ```
 
 Yields:
 
 ```json
-[{"path":"test/fixture/1.js","cwd":"/Users/tilde/projects/oss/vfile-reporter-json","history":["test/fixture/1.js"],"messages":[{"reason":"Warning!","line":2,"column":4,"location":{"start":{"line":2,"column":4},"end":{"line":null,"column":null}},"ruleId":null,"source":null,"fatal":false,"stack":null}]},{"path":"test/fixture/2.js","cwd":"/Users/tilde/projects/oss/vfile-reporter-json","history":["test/fixture/2.js"],"messages":[]}]
+[{"path":"test/fixture/1.js","cwd":"/Users/tilde/projects/oss/vfile-reporter-json","history":["test/fixture/1.js"],"messages":[{"reason":"Warning!","line":2,"column":4,"position":{"start":{"line":2,"column":4},"end":{"line":null,"column":null}},"ruleId":null,"source":null,"fatal":false,"stack":null}]},{"path":"test/fixture/2.js","cwd":"/Users/tilde/projects/oss/vfile-reporter-json","history":["test/fixture/2.js"],"messages":[]}]
 ```
 
 ## API
+
+This package exports the following identifiers: `reporterJson`.
+There is no default export.
 
 ### `reporter(files[, options])`
 

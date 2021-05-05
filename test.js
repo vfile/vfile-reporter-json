@@ -1,32 +1,30 @@
-'use strict'
-
-var test = require('tape')
-var vfile = require('vfile')
-var reporter = require('.')
+import test from 'tape'
+import {VFile} from 'vfile'
+import {reporterJson} from './index.js'
 
 var cwd = process.cwd()
 
-test('vfile-reporter-json', function (t) {
+test('reporterJson(vfiles)', function (t) {
   var file
 
   t.throws(
     function () {
-      reporter()
+      reporterJson()
     },
     /^TypeError: Cannot use 'in' operator to search for 'length' in undefined$/,
     'fail without file'
   )
 
-  t.equal(reporter([]), '[]', 'empty stringified array without files')
+  t.equal(reporterJson([]), '[]', 'empty stringified array without files')
 
-  file = vfile({path: 'a.js'})
+  file = new VFile({path: 'a.js'})
 
   t.equal(
-    reporter(file),
+    reporterJson(file),
     JSON.stringify([
       {
         path: 'a.js',
-        cwd: cwd,
+        cwd,
         history: ['a.js'],
         messages: []
       }
@@ -34,15 +32,15 @@ test('vfile-reporter-json', function (t) {
     'should support a file'
   )
 
-  file = vfile({path: 'a.js'})
+  file = new VFile({path: 'a.js'})
 
   t.equal(
-    reporter(file, {pretty: true}),
+    reporterJson(file, {pretty: true}),
     JSON.stringify(
       [
         {
           path: 'a.js',
-          cwd: cwd,
+          cwd,
           history: ['a.js'],
           messages: []
         }
@@ -54,12 +52,12 @@ test('vfile-reporter-json', function (t) {
   )
 
   t.equal(
-    reporter(file, {pretty: 4}),
+    reporterJson(file, {pretty: 4}),
     JSON.stringify(
       [
         {
           path: 'a.js',
-          cwd: cwd,
+          cwd,
           history: ['a.js'],
           messages: []
         }
@@ -71,12 +69,12 @@ test('vfile-reporter-json', function (t) {
   )
 
   t.equal(
-    reporter(file, {pretty: '\t'}),
+    reporterJson(file, {pretty: '\t'}),
     JSON.stringify(
       [
         {
           path: 'a.js',
-          cwd: cwd,
+          cwd,
           history: ['a.js'],
           messages: []
         }
@@ -88,13 +86,13 @@ test('vfile-reporter-json', function (t) {
   )
 
   t.equal(
-    reporter(file, {quiet: true}),
+    reporterJson(file, {quiet: true}),
     JSON.stringify([]),
     'should support `quiet: true` on successful files'
   )
 
   t.equal(
-    reporter(file, {silent: true}),
+    reporterJson(file, {silent: true}),
     JSON.stringify([]),
     'should support `silent: true` on successful files'
   )
@@ -102,18 +100,18 @@ test('vfile-reporter-json', function (t) {
   file.message('Warning!')
 
   t.equal(
-    reporter(file, {quiet: true}),
+    reporterJson(file, {quiet: true}),
     JSON.stringify([
       {
         path: 'a.js',
-        cwd: cwd,
+        cwd,
         history: ['a.js'],
         messages: [
           {
             reason: 'Warning!',
             line: null,
             column: null,
-            location: {
+            position: {
               start: {line: null, column: null},
               end: {line: null, column: null}
             },
@@ -129,7 +127,7 @@ test('vfile-reporter-json', function (t) {
   )
 
   t.equal(
-    reporter(file, {silent: true}),
+    reporterJson(file, {silent: true}),
     JSON.stringify([]),
     'should support `silent: true` on files with warnings'
   )
@@ -138,21 +136,21 @@ test('vfile-reporter-json', function (t) {
 
   try {
     file.fail('Error!')
-  } catch (_) {}
+  } catch {}
 
   t.equal(
-    reporter(file, {quiet: true}),
+    reporterJson(file, {quiet: true}),
     JSON.stringify([
       {
         path: 'a.js',
-        cwd: cwd,
+        cwd,
         history: ['a.js'],
         messages: [
           {
             reason: 'Error!',
             line: null,
             column: null,
-            location: {
+            position: {
               start: {line: null, column: null},
               end: {line: null, column: null}
             },
@@ -168,18 +166,18 @@ test('vfile-reporter-json', function (t) {
   )
 
   t.equal(
-    reporter(file, {silent: true}),
+    reporterJson(file, {silent: true}),
     JSON.stringify([
       {
         path: 'a.js',
-        cwd: cwd,
+        cwd,
         history: ['a.js'],
         messages: [
           {
             reason: 'Error!',
             line: null,
             column: null,
-            location: {
+            position: {
               start: {line: null, column: null},
               end: {line: null, column: null}
             },
@@ -198,21 +196,21 @@ test('vfile-reporter-json', function (t) {
 
   try {
     file.fail('Error!')
-  } catch (_) {}
+  } catch {}
 
   t.equal(
-    reporter(file),
+    reporterJson(file),
     JSON.stringify([
       {
         path: 'a.js',
-        cwd: cwd,
+        cwd,
         history: ['a.js'],
         messages: [
           {
             reason: 'Error!',
             line: null,
             column: null,
-            location: {
+            position: {
               start: {line: null, column: null},
               end: {line: null, column: null}
             },
@@ -231,18 +229,18 @@ test('vfile-reporter-json', function (t) {
   file.message('Warning!')
 
   t.equal(
-    reporter(file),
+    reporterJson(file),
     JSON.stringify([
       {
         path: 'a.js',
-        cwd: cwd,
+        cwd,
         history: ['a.js'],
         messages: [
           {
             reason: 'Warning!',
             line: null,
             column: null,
-            location: {
+            position: {
               start: {line: null, column: null},
               end: {line: null, column: null}
             },
@@ -258,17 +256,17 @@ test('vfile-reporter-json', function (t) {
   )
 
   t.equal(
-    reporter([vfile({path: 'a.js'}), vfile({path: 'b.js'})]),
+    reporterJson([new VFile({path: 'a.js'}), new VFile({path: 'b.js'})]),
     JSON.stringify([
       {
         path: 'a.js',
-        cwd: cwd,
+        cwd,
         history: ['a.js'],
         messages: []
       },
       {
         path: 'b.js',
-        cwd: cwd,
+        cwd,
         history: ['b.js'],
         messages: []
       }
@@ -276,22 +274,22 @@ test('vfile-reporter-json', function (t) {
     'should work on files without messages'
   )
 
-  file = vfile({path: 'a.js'})
+  file = new VFile({path: 'a.js'})
   file.message('Warning!')
 
   t.equal(
-    reporter([file]),
+    reporterJson([file]),
     JSON.stringify([
       {
         path: 'a.js',
-        cwd: cwd,
+        cwd,
         history: ['a.js'],
         messages: [
           {
             reason: 'Warning!',
             line: null,
             column: null,
-            location: {
+            position: {
               start: {line: null, column: null},
               end: {line: null, column: null}
             },
@@ -306,24 +304,24 @@ test('vfile-reporter-json', function (t) {
     'should work on files with warning messages'
   )
 
-  file = vfile({path: 'a.js'})
+  file = new VFile({path: 'a.js'})
   try {
     file.fail('Error!')
-  } catch (_) {}
+  } catch {}
 
   t.equal(
-    reporter([file]),
+    reporterJson([file]),
     JSON.stringify([
       {
         path: 'a.js',
-        cwd: cwd,
+        cwd,
         history: ['a.js'],
         messages: [
           {
             reason: 'Error!',
             line: null,
             column: null,
-            location: {
+            position: {
               start: {line: null, column: null},
               end: {line: null, column: null}
             },

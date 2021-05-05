@@ -1,8 +1,4 @@
-'use strict'
-
-module.exports = reporter
-
-function reporter(files, options) {
+export function reporterJson(files, options) {
   var settings = options || {}
   var pretty = settings.pretty || 0
   var data = filesToJson('length' in files ? files : [files], settings)
@@ -45,7 +41,7 @@ function messagesToJson(messages, options) {
       reason: message.reason,
       line: message.line,
       column: message.column,
-      location: message.location,
+      position: message.position,
       ruleId: message.ruleId || null,
       source: message.source || null,
       fatal: message.fatal,
