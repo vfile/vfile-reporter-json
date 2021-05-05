@@ -5,15 +5,13 @@ import {reporterJson} from './index.js'
 var cwd = process.cwd()
 
 test('reporterJson(vfiles)', function (t) {
+  /** @type {VFile} */
   var file
 
-  t.throws(
-    function () {
-      reporterJson()
-    },
-    /^TypeError: Cannot use 'in' operator to search for 'length' in undefined$/,
-    'fail without file'
-  )
+  t.throws(function () {
+    // @ts-ignore runtime
+    reporterJson()
+  }, 'fail without file')
 
   t.equal(reporterJson([]), '[]', 'empty stringified array without files')
 
