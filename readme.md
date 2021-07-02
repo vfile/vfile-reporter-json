@@ -43,7 +43,7 @@ Yields:
 ## API
 
 This package exports the following identifiers: `reporterJson`.
-There is no default export.
+That identifier is also the default export.
 
 ### `reporter(files[, options])`
 

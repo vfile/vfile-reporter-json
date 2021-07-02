@@ -95,3 +95,5 @@ function messagesToJson(messages, options) {
 
   return result
 }
+
+export default reporterJson
