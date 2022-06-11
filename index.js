@@ -3,9 +3,15 @@
  * @typedef {import('vfile-message').VFileMessage} VFileMessage
  *
  * @typedef Options
+ *   Configuration (optional).
  * @property {number|string|boolean} [pretty=0]
+ *   Value of `space` of `JSON.stringify(x, null, space)`.
  * @property {boolean} [quiet=false]
+ *   Do not show files without messages.
  * @property {boolean} [silent=false]
+ *   Show errors only.
+ *   This does not show info and warning messages.
+ *   Also sets `quiet` to `true`.
  *
  * @typedef _JsonMessage
  * @property {string} reason
@@ -20,36 +26,40 @@
  * @typedef _JsonFile
  * @property {string} path
  * @property {string} cwd
- * @property {Array.<string>} history
- * @property {Array.<_JsonMessage>} messages
+ * @property {Array<string>} history
+ * @property {Array<_JsonMessage>} messages
  */
 
 /**
- * @param {Array.<VFile>|VFile} files
+ * Create a report from one file or multiple files.
+ *
+ * @param {Array<VFile>|VFile} files
+ *   File(s) to report.
  * @param {Options} options
+ *   Configuration (optional).
  * @returns {string}
+ *   Report (serialized JSON).
  */
 export function reporterJson(files, options = {}) {
-  var pretty = options.pretty || 0
-  var data = filesToJson(Array.isArray(files) ? files : [files], options)
+  const pretty = options.pretty || 0
+  const data = filesToJson(Array.isArray(files) ? files : [files], options)
 
   return JSON.stringify(data, null, pretty === true ? 2 : pretty)
 }
 
 /**
- * @param {Array.<VFile>} files
+ * @param {Array<VFile>} files
  * @param {Options} options
- * @returns {Array.<_JsonFile>}
+ * @returns {Array<_JsonFile>}
  */
 function filesToJson(files, options) {
-  var index = -1
-  /** @type {Array.<_JsonFile>} */
-  var result = []
-  /** @type {_JsonFile} */
-  var file
+  let index = -1
+  /** @type {Array<_JsonFile>} */
+  const result = []
 
   while (++index < files.length) {
-    file = {
+    /** @type {_JsonFile} */
+    const file = {
       path: files[index].path,
       cwd: files[index].cwd,
       history: files[index].history,
@@ -65,19 +75,17 @@ function filesToJson(files, options) {
 }
 
 /**
- * @param {Array.<VFileMessage>} messages
+ * @param {Array<VFileMessage>} messages
  * @param {Options} options
- * @returns {Array.<_JsonMessage>}
+ * @returns {Array<_JsonMessage>}
  */
 function messagesToJson(messages, options) {
-  var index = -1
-  /** @type {Array.<_JsonMessage>} */
-  var result = []
-  /** @type {VFileMessage} */
-  var message
+  let index = -1
+  /** @type {Array<_JsonMessage>} */
+  const result = []
 
   while (++index < messages.length) {
-    message = messages[index]
+    const message = messages[index]
 
     if (!options.silent || message.fatal) {
       result.push({

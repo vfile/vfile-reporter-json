@@ -1,12 +1,13 @@
+import process from 'node:process'
 import test from 'tape'
 import {VFile} from 'vfile'
 import {reporterJson} from './index.js'
 
-var cwd = process.cwd()
+const cwd = process.cwd()
 
 test('reporterJson(vfiles)', function (t) {
   /** @type {VFile} */
-  var file
+  let file
 
   t.throws(function () {
     // @ts-ignore runtime
