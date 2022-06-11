@@ -7,17 +7,52 @@
 [![Backers][backers-badge]][collective]
 [![Chat][chat-badge]][chat]
 
-Format [`vfile`][vfile]s as **stringified** JSON.
+[vfile][] utility to create a report in machine readable JSON.
+
+## Contents
+
+*   [What is this?](#what-is-this)
+*   [When should I use this?](#when-should-i-use-this)
+*   [Install](#install)
+*   [Use](#use)
+*   [API](#api)
+    *   [`reporter(files[, options])`](#reporterfiles-options)
+*   [Types](#types)
+*   [Compatibility](#compatibility)
+*   [Contribute](#contribute)
+*   [License](#license)
+
+## What is this?
+
+This package is like [`vfile-reporter`][vfile-reporter] but it outputs machine
+readable JSON.
+
+## When should I use this?
+
+You can use this when you need to serialize lint results for machines, use
+`vfile-reporter` itself for humans.
 
 ## Install
 
-This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):
-Node 12+ is needed to use it and it must be `import`ed instead of `require`d.
-
-[npm][]:
+This package is [ESM only][esm].
+In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
 
 ```sh
 npm install vfile-reporter-json
+```
+
+In Deno with [`esm.sh`][esmsh]:
+
+```js
+import {reporterJson} from 'https://esm.sh/vfile-reporter-json@3'
+```
+
+In browsers with [`esm.sh`][esmsh]:
+
+```html
+<script type="module">
+  import {reporterJson} from 'https://esm.sh/vfile-reporter-json@3?bundle'
+</script>
 ```
 
 ## Use
@@ -26,8 +61,8 @@ npm install vfile-reporter-json
 import {VFile} from 'vfile'
 import {reporterJson} from 'vfile-reporter-json'
 
-var one = new VFile({path: 'test/fixture/1.js'})
-var two = new VFile({path: 'test/fixture/2.js'})
+const one = new VFile({path: 'test/fixture/1.js'})
+const two = new VFile({path: 'test/fixture/2.js'})
 
 one.message('Warning!', {line: 2, column: 4})
 
@@ -42,7 +77,7 @@ Yields:
 
 ## API
 
-This package exports the following identifiers: `reporterJson`.
+This package exports the identifier `reporterJson`.
 That identifier is also the default export.
 
 ### `reporter(files[, options])`
@@ -66,6 +101,18 @@ Also sets `quiet` to `true`.
 Given as `space` to [`JSON.stringify()`][json-stringify] (`boolean`, `number`,
 or `string`, default: `0`).
 When `true`, defaults to `2`.
+
+## Types
+
+This package is fully typed with [TypeScript][].
+It exports the additional type `Options`.
+
+## Compatibility
+
+Projects maintained by the unified collective are compatible with all maintained
+versions of Node.js.
+As of now, that is Node.js 12.20+, 14.14+, 16.0+, and 18.0+.
+Our projects sometimes work with older versions, but this is not guaranteed.
 
 ## Contribute
 
@@ -107,18 +154,26 @@ abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
-[contributing]: https://github.com/vfile/.github/blob/HEAD/contributing.md
+[esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
 
-[support]: https://github.com/vfile/.github/blob/HEAD/support.md
+[esmsh]: https://esm.sh
+
+[typescript]: https://www.typescriptlang.org
+
+[contributing]: https://github.com/vfile/.github/blob/main/contributing.md
+
+[support]: https://github.com/vfile/.github/blob/main/support.md
 
 [health]: https://github.com/vfile/.github
 
-[coc]: https://github.com/vfile/.github/blob/HEAD/code-of-conduct.md
+[coc]: https://github.com/vfile/.github/blob/main/code-of-conduct.md
 
 [license]: license
 
 [author]: https://wooorm.com
 
 [vfile]: https://github.com/vfile/vfile
+
+[vfile-reporter]: https://github.com/vfile/vfile-reporter
 
 [json-stringify]: https://developer.mozilla.org/JavaScript/Reference/Global_Objects/JSON/stringify
