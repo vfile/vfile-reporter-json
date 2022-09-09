@@ -117,7 +117,11 @@ test('reporterJson(vfiles)', function (t) {
             ruleId: null,
             source: null,
             fatal: false,
-            stack: null
+            stack: null,
+            actual: null,
+            expected: null,
+            url: null,
+            note: null
           }
         ]
       }
@@ -156,7 +160,11 @@ test('reporterJson(vfiles)', function (t) {
             ruleId: null,
             source: null,
             fatal: true,
-            stack: null
+            stack: null,
+            actual: null,
+            expected: null,
+            url: null,
+            note: null
           }
         ]
       }
@@ -183,7 +191,11 @@ test('reporterJson(vfiles)', function (t) {
             ruleId: null,
             source: null,
             fatal: true,
-            stack: null
+            stack: null,
+            actual: null,
+            expected: null,
+            url: null,
+            note: null
           }
         ]
       }
@@ -216,7 +228,11 @@ test('reporterJson(vfiles)', function (t) {
             ruleId: null,
             source: null,
             fatal: true,
-            stack: null
+            stack: null,
+            actual: null,
+            expected: null,
+            url: null,
+            note: null
           }
         ]
       }
@@ -246,7 +262,11 @@ test('reporterJson(vfiles)', function (t) {
             ruleId: null,
             source: null,
             fatal: false,
-            stack: null
+            stack: null,
+            actual: null,
+            expected: null,
+            url: null,
+            note: null
           }
         ]
       }
@@ -295,7 +315,11 @@ test('reporterJson(vfiles)', function (t) {
             ruleId: null,
             source: null,
             fatal: false,
-            stack: null
+            stack: null,
+            actual: null,
+            expected: null,
+            url: null,
+            note: null
           }
         ]
       }
@@ -327,7 +351,11 @@ test('reporterJson(vfiles)', function (t) {
             ruleId: null,
             source: null,
             fatal: true,
-            stack: null
+            stack: null,
+            actual: null,
+            expected: null,
+            url: null,
+            note: null
           }
         ]
       }
