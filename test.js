@@ -335,5 +335,37 @@ test('reporterJson(vfiles)', function (t) {
     'should work on files with fatal messages'
   )
 
+  file.messages = []
+  file.message('Warning!')
+  file.messages[0].url = 'https://example.com'
+
+  t.equal(
+    reporterJson(file),
+    JSON.stringify([
+      {
+        path: 'a.js',
+        cwd,
+        history: ['a.js'],
+        messages: [
+          {
+            reason: 'Warning!',
+            line: null,
+            column: null,
+            position: {
+              start: {line: null, column: null},
+              end: {line: null, column: null}
+            },
+            ruleId: null,
+            source: null,
+            fatal: false,
+            stack: null,
+            url: 'https://example.com'
+          }
+        ]
+      }
+    ]),
+    'should support well-known fields'
+  )
+
   t.end()
 })

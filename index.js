@@ -22,6 +22,10 @@
  * @property {string} source
  * @property {boolean} fatal
  * @property {string} stack
+ * @property {string} actual
+ * @property {string|Array<string>} expected
+ * @property {string} url
+ * @property {string} note
  *
  * @typedef _JsonFile
  * @property {string} path
@@ -96,7 +100,11 @@ function messagesToJson(messages, options) {
         ruleId: message.ruleId || null,
         source: message.source || null,
         fatal: message.fatal,
-        stack: message.stack || null
+        stack: message.stack || null,
+        actual: message.actual || undefined,
+        expected: message.expected || undefined,
+        url: message.url || undefined,
+        note: message.note || undefined
       })
     }
   }
