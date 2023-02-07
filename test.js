@@ -1,24 +1,25 @@
+import assert from 'node:assert/strict'
 import process from 'node:process'
-import test from 'tape'
+import test from 'node:test'
 import {VFile} from 'vfile'
 import {reporterJson} from './index.js'
 
 const cwd = process.cwd()
 
-test('reporterJson(vfiles)', function (t) {
+test('reporterJson', function () {
   /** @type {VFile} */
   let file
 
-  t.throws(function () {
+  assert.throws(function () {
     // @ts-ignore runtime
     reporterJson()
   }, 'fail without file')
 
-  t.equal(reporterJson([]), '[]', 'empty stringified array without files')
+  assert.equal(reporterJson([]), '[]', 'empty stringified array without files')
 
   file = new VFile({path: 'a.js'})
 
-  t.equal(
+  assert.equal(
     reporterJson(file),
     JSON.stringify([
       {
@@ -33,7 +34,7 @@ test('reporterJson(vfiles)', function (t) {
 
   file = new VFile({path: 'a.js'})
 
-  t.equal(
+  assert.equal(
     reporterJson(file, {pretty: true}),
     JSON.stringify(
       [
@@ -50,7 +51,7 @@ test('reporterJson(vfiles)', function (t) {
     'should support `pretty: true`'
   )
 
-  t.equal(
+  assert.equal(
     reporterJson(file, {pretty: 4}),
     JSON.stringify(
       [
@@ -67,7 +68,7 @@ test('reporterJson(vfiles)', function (t) {
     'should support `pretty: 4`'
   )
 
-  t.equal(
+  assert.equal(
     reporterJson(file, {pretty: '\t'}),
     JSON.stringify(
       [
@@ -84,13 +85,13 @@ test('reporterJson(vfiles)', function (t) {
     "should support `pretty: '\\t'`"
   )
 
-  t.equal(
+  assert.equal(
     reporterJson(file, {quiet: true}),
     JSON.stringify([]),
     'should support `quiet: true` on successful files'
   )
 
-  t.equal(
+  assert.equal(
     reporterJson(file, {silent: true}),
     JSON.stringify([]),
     'should support `silent: true` on successful files'
@@ -98,7 +99,7 @@ test('reporterJson(vfiles)', function (t) {
 
   file.message('Warning!')
 
-  t.equal(
+  assert.equal(
     reporterJson(file, {quiet: true}),
     JSON.stringify([
       {
@@ -125,7 +126,7 @@ test('reporterJson(vfiles)', function (t) {
     'should support `quiet: true` on files with warnings'
   )
 
-  t.equal(
+  assert.equal(
     reporterJson(file, {silent: true}),
     JSON.stringify([]),
     'should support `silent: true` on files with warnings'
@@ -137,7 +138,7 @@ test('reporterJson(vfiles)', function (t) {
     file.fail('Error!')
   } catch {}
 
-  t.equal(
+  assert.equal(
     reporterJson(file, {quiet: true}),
     JSON.stringify([
       {
@@ -164,7 +165,7 @@ test('reporterJson(vfiles)', function (t) {
     'should support `quiet: true` on fatal files'
   )
 
-  t.equal(
+  assert.equal(
     reporterJson(file, {silent: true}),
     JSON.stringify([
       {
@@ -197,7 +198,7 @@ test('reporterJson(vfiles)', function (t) {
     file.fail('Error!')
   } catch {}
 
-  t.equal(
+  assert.equal(
     reporterJson(file),
     JSON.stringify([
       {
@@ -227,7 +228,7 @@ test('reporterJson(vfiles)', function (t) {
   file.messages = []
   file.message('Warning!')
 
-  t.equal(
+  assert.equal(
     reporterJson(file),
     JSON.stringify([
       {
@@ -254,7 +255,7 @@ test('reporterJson(vfiles)', function (t) {
     'should support a warning message on a file'
   )
 
-  t.equal(
+  assert.equal(
     reporterJson([new VFile({path: 'a.js'}), new VFile({path: 'b.js'})]),
     JSON.stringify([
       {
@@ -276,7 +277,7 @@ test('reporterJson(vfiles)', function (t) {
   file = new VFile({path: 'a.js'})
   file.message('Warning!')
 
-  t.equal(
+  assert.equal(
     reporterJson([file]),
     JSON.stringify([
       {
@@ -308,7 +309,7 @@ test('reporterJson(vfiles)', function (t) {
     file.fail('Error!')
   } catch {}
 
-  t.equal(
+  assert.equal(
     reporterJson([file]),
     JSON.stringify([
       {
@@ -339,7 +340,7 @@ test('reporterJson(vfiles)', function (t) {
   file.message('Warning!')
   file.messages[0].url = 'https://example.com'
 
-  t.equal(
+  assert.equal(
     reporterJson(file),
     JSON.stringify([
       {
@@ -366,6 +367,4 @@ test('reporterJson(vfiles)', function (t) {
     ]),
     'should support well-known fields'
   )
-
-  t.end()
 })
