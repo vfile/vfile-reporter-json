@@ -3,10 +3,17 @@ import process from 'node:process'
 import test from 'node:test'
 import {VFile} from 'vfile'
 import {reporterJson} from './index.js'
+import * as mod from './index.js'
 
 const cwd = process.cwd()
 
 test('reporterJson', function () {
+  assert.deepEqual(
+    Object.keys(mod).sort(),
+    ['default', 'reporterJson'],
+    'should expose the public api'
+  )
+
   /** @type {VFile} */
   let file
 
