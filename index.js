@@ -15,17 +15,17 @@
  *
  * @typedef _JsonMessage
  * @property {string} reason
- * @property {number} line
- * @property {number} column
+ * @property {number | null} line
+ * @property {number | null} column
  * @property {VFileMessage['position']} position
- * @property {string} ruleId
- * @property {string} source
- * @property {boolean} fatal
- * @property {string} stack
- * @property {string} actual
- * @property {string|Array<string>} expected
- * @property {string} url
- * @property {string} note
+ * @property {string | null} ruleId
+ * @property {string | null} source
+ * @property {boolean | null | undefined} fatal
+ * @property {string | null} stack
+ * @property {string | null | undefined} actual
+ * @property {Array<string> | null | undefined} expected
+ * @property {string | null | undefined} url
+ * @property {string | null | undefined} note
  *
  * @typedef _JsonFile
  * @property {string} path
