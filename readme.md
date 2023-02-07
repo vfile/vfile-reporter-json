@@ -16,7 +16,10 @@
 *   [Install](#install)
 *   [Use](#use)
 *   [API](#api)
-    *   [`reporter(files[, options])`](#reporterfiles-options)
+    *   [`reporterJson(files[, options])`](#reporterjsonfiles-options)
+    *   [`JsonFile`](#jsonfile)
+    *   [`JsonMessage`](#jsonmessage)
+    *   [`Options`](#options)
 *   [Types](#types)
 *   [Compatibility](#compatibility)
 *   [Contribute](#contribute)
@@ -35,7 +38,7 @@ You can use this when you need to serialize lint results for machines, use
 ## Install
 
 This package is [ESM only][esm].
-In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
+In Node.js (version 14.14+ and 16.0+), install with [npm][]:
 
 ```sh
 npm install vfile-reporter-json
@@ -77,41 +80,106 @@ Yields:
 
 ## API
 
-This package exports the identifier `reporterJson`.
+This package exports the identifier [`reporterJson`][api-reporter-json].
 That identifier is also the default export.
 
-### `reporter(files[, options])`
+### `reporterJson(files[, options])`
 
-Generate **stringified** JSON for `files` ([`VFile`][vfile] or `Array.<VFile>`).
+Create a **serialized** JSON report from one file or multiple files.
 
-###### `options.quiet`
+###### Parameters
 
-Do not output anything for a file which has no warnings or errors (`boolean`,
-default: `false`).
-The default behavior is to show a success message.
+*   `files` ([`VFile`][vfile] or `Array<VFile>`)
+    — file or files to report
+*   `options` ([`Options`][api-options], optional)
+    — configuration
 
-###### `options.silent`
+###### Returns
 
-Do not output messages without `fatal` set to true (`boolean`, default:
-`false`).
-Also sets `quiet` to `true`.
+Report as serialized JSON (`string`).
 
-###### `options.pretty`
+Reporters must return strings, which is why serialized JSON is exposed.
+You can parse the result with `JSON.parse`, in which case you will get
+[`Array<JsonFile>`][api-json-file].
 
-Given as `space` to [`JSON.stringify()`][json-stringify] (`boolean`, `number`,
-or `string`, default: `0`).
-When `true`, defaults to `2`.
+### `JsonFile`
+
+JSON file (TypeScript type).
+
+###### Fields
+
+*   `path` (`string`)
+    — full path (example: `'~/index.min.js'`)
+*   `cwd` (`string`)
+    — base of `path`
+*   `history` (`Array<string>`)
+    — list of filepaths the file moved between; the first is the original path
+    and the last is the current path
+*   `messages` ([`Array<JsonMessage>`][api-json-message])
+    — list of filepaths the file moved between; the first is the original path
+    and the last is the current path
+
+### `JsonMessage`
+
+JSON message (TypeScript type).
+
+###### Fields
+
+*   `stack` (`string | null`)
+    — stack of message; this is used by normal errors to show where something
+    happened in programming code
+*   `reason` (`string`)
+    — reason for message; you should use markdown
+*   `fatal` (`boolean | null | undefined`)
+    — state of problem; `true` marks associated file as no longer processable
+    (error); `false` necessitates a (potential) change (warning);
+    `null | undefined` for things that might not need changing (info)
+*   `line` (`number | null`)
+    — starting line of error
+*   `column` (`number | null`)
+    — starting column of error
+*   `position` (`Position | null`)
+    — full unist position
+*   `source` (`string | null`)
+    — namespace of message (example: `'my-package'`)
+*   `ruleId` (`string | null`)
+    — category of message (example: `'my-rule'`)
+*   `actual` (`string | null | undefined`)
+    — specify the source value that’s being reported, which is deemed incorrect
+*   `expected` (`Array<string> | null | undefined`)
+    — suggest acceptable values that can be used instead of `actual`
+*   `url` (`string | null | undefined`)
+    — link to docs for the message; this must be an absolute URL that can be
+    passed as `x` to `new URL(x)`
+*   `note` (`string | null | undefined`)
+    — long form description of the message (should use markdown)
+
+### `Options`
+
+Configuration (TypeScript type).
+
+###### Fields
+
+*   `pretty` (`number | string | boolean`, default: `0`)
+    — value of `space` of
+    [`JSON.stringify(x, undefined, space)`][json-stringify]
+*   `quiet` (`boolean`, default: `false`)
+    — do not show files without messages
+*   `silent` (`boolean`, default: `false`)
+    — show errors only; this does not show info and warning messages; also sets
+    `quiet` to `true`
 
 ## Types
 
 This package is fully typed with [TypeScript][].
-It exports the additional type `Options`.
+It exports the additional types [`JsonFile`][api-json-file],
+[`JsonMessage`][api-json-message], and [`Options`][api-options].
 
 ## Compatibility
 
 Projects maintained by the unified collective are compatible with all maintained
 versions of Node.js.
-As of now, that is Node.js 12.20+, 14.14+, 16.0+, and 18.0+.
+As of now, that is Node.js 14.14+ and 16.0+.
 Our projects sometimes work with older versions, but this is not guaranteed.
 
 ## Contribute
@@ -177,3 +245,11 @@ abide by its terms.
 [vfile-reporter]: https://github.com/vfile/vfile-reporter
 
 [json-stringify]: https://developer.mozilla.org/JavaScript/Reference/Global_Objects/JSON/stringify
+
+[api-reporter-json]: #reporterjsonfiles-options
+
+[api-json-file]: #jsonfile
+
+[api-json-message]: #jsonmessage
+
+[api-options]: #options
