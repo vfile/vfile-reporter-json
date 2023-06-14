@@ -3,6 +3,7 @@
 [![Build][build-badge]][build]
 [![Coverage][coverage-badge]][coverage]
 [![Downloads][downloads-badge]][downloads]
+[![Size][size-badge]][size]
 [![Sponsors][sponsors-badge]][collective]
 [![Backers][backers-badge]][collective]
 [![Chat][chat-badge]][chat]
@@ -38,7 +39,7 @@ You can use this when you need to serialize lint results for machines, use
 ## Install
 
 This package is [ESM only][esm].
-In Node.js (version 14.14+ and 16.0+), install with [npm][]:
+In Node.js (version 16+), install with [npm][]:
 
 ```sh
 npm install vfile-reporter-json
@@ -89,9 +90,9 @@ Create a **serialized** JSON report from one file or multiple files.
 
 ###### Parameters
 
-*   `files` ([`VFile`][vfile] or `Array<VFile>`)
+*   `files` ([`Array<VFile>`][vfile] or `VFile`)
     — file or files to report
-*   `options` ([`Options`][api-options], optional)
+*   `options` ([`Options`][api-options], default: `{}`)
     — configuration
 
 ###### Returns
@@ -108,8 +109,6 @@ JSON file (TypeScript type).
 
 ###### Fields
 
-*   `path` (`string`)
-    — full path (example: `'~/index.min.js'`)
 *   `cwd` (`string`)
     — base of `path`
 *   `history` (`Array<string>`)
@@ -118,6 +117,8 @@ JSON file (TypeScript type).
 *   `messages` ([`Array<JsonMessage>`][api-json-message])
     — list of filepaths the file moved between; the first is the original path
     and the last is the current path
+*   `path` (`string`)
+    — full path (example: `'~/index.min.js'`)
 
 ### `JsonMessage`
 
@@ -125,34 +126,33 @@ JSON message (TypeScript type).
 
 ###### Fields
 
-*   `stack` (`string | null`)
-    — stack of message; this is used by normal errors to show where something
-    happened in programming code
+*   `ancestors` ([`Array<Node>`][unist-node] or `undefined`)
+    — stack of ancestor nodes surrounding the message
+*   `column` (`number` or `undefined`)
+    — starting column of message
+*   `fatal` (`boolean` or `undefined`)
+    — state of problem; `true`: error, file not usable; `false`: warning,
+    change may be needed; `undefined`: change likely not needed
+*   `line` (`number` or `undefined`)
+    — starting line of message
+*   `place` ([`Point`][unist-point], [`Position`][unist-position], or
+    `undefined`)
+    — place of message
 *   `reason` (`string`)
-    — reason for message; you should use markdown
-*   `fatal` (`boolean | null | undefined`)
-    — state of problem; `true` marks associated file as no longer processable
-    (error); `false` necessitates a (potential) change (warning);
-    `null | undefined` for things that might not need changing (info)
-*   `line` (`number | null`)
-    — starting line of error
-*   `column` (`number | null`)
-    — starting column of error
-*   `position` (`Position | null`)
-    — full unist position
-*   `source` (`string | null`)
-    — namespace of message (example: `'my-package'`)
+    — reason for message, should use markdown
 *   `ruleId` (`string | null`)
     — category of message (example: `'my-rule'`)
+*   `source` (`string | null`)
+    — namespace of message (example: `'my-package'`)
 *   `actual` (`string | null | undefined`)
     — specify the source value that’s being reported, which is deemed incorrect
 *   `expected` (`Array<string> | null | undefined`)
     — suggest acceptable values that can be used instead of `actual`
+*   `note` (`string | null | undefined`)
+    — long form description of the message, should use markdown
 *   `url` (`string | null | undefined`)
     — link to docs for the message; this must be an absolute URL that can be
     passed as `x` to `new URL(x)`
-*   `note` (`string | null | undefined`)
-    — long form description of the message (should use markdown)
 
 ### `Options`
 
@@ -160,7 +160,7 @@ Configuration (TypeScript type).
 
 ###### Fields
 
-*   `pretty` (`number | string | boolean`, default: `0`)
+*   `pretty` (`boolean`, `number`, or `string`, default: `0`)
     — value of `space` of
     [`JSON.stringify(x, undefined, space)`][json-stringify]
 *   `quiet` (`boolean`, default: `false`)
@@ -177,10 +177,13 @@ It exports the additional types [`JsonFile`][api-json-file],
 
 ## Compatibility
 
-Projects maintained by the unified collective are compatible with all maintained
+Projects maintained by the unified collective are compatible with maintained
 versions of Node.js.
-As of now, that is Node.js 14.14+ and 16.0+.
-Our projects sometimes work with older versions, but this is not guaranteed.
+
+When we cut a new major release, we drop support for unmaintained versions of
+Node.
+This means we try to keep the current release line, `vfile-reporter-json@^3`,
+compatible with Node.js 12.
 
 ## Contribute
 
@@ -209,6 +212,10 @@ abide by its terms.
 [downloads-badge]: https://img.shields.io/npm/dm/vfile-reporter-json.svg
 
 [downloads]: https://www.npmjs.com/package/vfile-reporter-json
+
+[size-badge]: https://img.shields.io/badge/dynamic/json?label=minzipped%20size&query=$.size.compressedSize&url=https://deno.bundlejs.com/?q=vfile-reporter-json
+
+[size]: https://bundlejs.com/?q=vfile-reporter-json
 
 [sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
 
@@ -239,6 +246,12 @@ abide by its terms.
 [license]: license
 
 [author]: https://wooorm.com
+
+[unist-node]: https://github.com/syntax-tree/unist#node
+
+[unist-point]: https://github.com/syntax-tree/unist#point
+
+[unist-position]: https://github.com/syntax-tree/unist#position
 
 [vfile]: https://github.com/vfile/vfile
 
