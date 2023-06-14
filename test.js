@@ -2,13 +2,13 @@ import assert from 'node:assert/strict'
 import process from 'node:process'
 import test from 'node:test'
 import {VFile} from 'vfile'
-import {reporterJson} from './index.js'
+import {reporterJson} from 'vfile-reporter-json'
 
 const cwd = process.cwd()
 
 test('reporterJson', async function () {
   assert.deepEqual(
-    Object.keys(await import('./index.js')).sort(),
+    Object.keys(await import('vfile-reporter-json')).sort(),
     ['default', 'reporterJson'],
     'should expose the public api'
   )
