@@ -3,28 +3,19 @@ import process from 'node:process'
 import test from 'node:test'
 import {VFile} from 'vfile'
 import {reporterJson} from './index.js'
-import * as mod from './index.js'
 
 const cwd = process.cwd()
 
-test('reporterJson', function () {
+test('reporterJson', async function () {
   assert.deepEqual(
-    Object.keys(mod).sort(),
+    Object.keys(await import('./index.js')).sort(),
     ['default', 'reporterJson'],
     'should expose the public api'
   )
 
-  /** @type {VFile} */
-  let file
-
-  assert.throws(function () {
-    // @ts-ignore runtime
-    reporterJson()
-  }, 'fail without file')
-
   assert.equal(reporterJson([]), '[]', 'empty stringified array without files')
 
-  file = new VFile({path: 'a.js'})
+  let file = new VFile({path: 'a.js'})
 
   assert.equal(
     reporterJson(file),
@@ -52,7 +43,7 @@ test('reporterJson', function () {
           messages: []
         }
       ],
-      null,
+      undefined,
       2
     ),
     'should support `pretty: true`'
@@ -69,7 +60,7 @@ test('reporterJson', function () {
           messages: []
         }
       ],
-      null,
+      undefined,
       4
     ),
     'should support `pretty: 4`'
@@ -86,7 +77,7 @@ test('reporterJson', function () {
           messages: []
         }
       ],
-      null,
+      undefined,
       '\t'
     ),
     "should support `pretty: '\\t'`"
@@ -105,6 +96,7 @@ test('reporterJson', function () {
   )
 
   file.message('Warning!')
+  file.info('Info!')
 
   assert.equal(
     reporterJson(file, {quiet: true}),
@@ -116,16 +108,18 @@ test('reporterJson', function () {
         messages: [
           {
             reason: 'Warning!',
-            line: null,
-            column: null,
             position: {
               start: {line: null, column: null},
               end: {line: null, column: null}
             },
-            ruleId: null,
-            source: null,
-            fatal: false,
-            stack: null
+            fatal: false
+          },
+          {
+            reason: 'Info!',
+            position: {
+              start: {line: null, column: null},
+              end: {line: null, column: null}
+            }
           }
         ]
       }
@@ -155,16 +149,11 @@ test('reporterJson', function () {
         messages: [
           {
             reason: 'Error!',
-            line: null,
-            column: null,
             position: {
               start: {line: null, column: null},
               end: {line: null, column: null}
             },
-            ruleId: null,
-            source: null,
-            fatal: true,
-            stack: null
+            fatal: true
           }
         ]
       }
@@ -182,16 +171,11 @@ test('reporterJson', function () {
         messages: [
           {
             reason: 'Error!',
-            line: null,
-            column: null,
             position: {
               start: {line: null, column: null},
               end: {line: null, column: null}
             },
-            ruleId: null,
-            source: null,
-            fatal: true,
-            stack: null
+            fatal: true
           }
         ]
       }
@@ -215,16 +199,11 @@ test('reporterJson', function () {
         messages: [
           {
             reason: 'Error!',
-            line: null,
-            column: null,
             position: {
               start: {line: null, column: null},
               end: {line: null, column: null}
             },
-            ruleId: null,
-            source: null,
-            fatal: true,
-            stack: null
+            fatal: true
           }
         ]
       }
@@ -245,16 +224,11 @@ test('reporterJson', function () {
         messages: [
           {
             reason: 'Warning!',
-            line: null,
-            column: null,
             position: {
               start: {line: null, column: null},
               end: {line: null, column: null}
             },
-            ruleId: null,
-            source: null,
-            fatal: false,
-            stack: null
+            fatal: false
           }
         ]
       }
@@ -294,16 +268,11 @@ test('reporterJson', function () {
         messages: [
           {
             reason: 'Warning!',
-            line: null,
-            column: null,
             position: {
               start: {line: null, column: null},
               end: {line: null, column: null}
             },
-            ruleId: null,
-            source: null,
-            fatal: false,
-            stack: null
+            fatal: false
           }
         ]
       }
@@ -326,16 +295,11 @@ test('reporterJson', function () {
         messages: [
           {
             reason: 'Error!',
-            line: null,
-            column: null,
             position: {
               start: {line: null, column: null},
               end: {line: null, column: null}
             },
-            ruleId: null,
-            source: null,
-            fatal: true,
-            stack: null
+            fatal: true
           }
         ]
       }
@@ -357,16 +321,11 @@ test('reporterJson', function () {
         messages: [
           {
             reason: 'Warning!',
-            line: null,
-            column: null,
             position: {
               start: {line: null, column: null},
               end: {line: null, column: null}
             },
-            ruleId: null,
-            source: null,
             fatal: false,
-            stack: null,
             url: 'https://example.com'
           }
         ]
