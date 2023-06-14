@@ -48,14 +48,14 @@ npm install vfile-reporter-json
 In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import {reporterJson} from 'https://esm.sh/vfile-reporter-json@3'
+import {reporterJson} from 'https://esm.sh/vfile-reporter-json@4'
 ```
 
 In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import {reporterJson} from 'https://esm.sh/vfile-reporter-json@3?bundle'
+  import {reporterJson} from 'https://esm.sh/vfile-reporter-json@4?bundle'
 </script>
 ```
 
