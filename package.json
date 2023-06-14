@@ -37,8 +37,9 @@
     "index.js"
   ],
   "dependencies": {
-    "vfile": "^5.0.0",
-    "vfile-message": "^3.0.0"
+    "@types/unist": "^2.0.0",
+    "vfile": "^6.0.0",
+    "vfile-message": "^4.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

@@ -105,23 +105,7 @@ test('reporterJson', async function () {
         path: 'a.js',
         cwd,
         history: ['a.js'],
-        messages: [
-          {
-            reason: 'Warning!',
-            position: {
-              start: {line: null, column: null},
-              end: {line: null, column: null}
-            },
-            fatal: false
-          },
-          {
-            reason: 'Info!',
-            position: {
-              start: {line: null, column: null},
-              end: {line: null, column: null}
-            }
-          }
-        ]
+        messages: [{fatal: false, reason: 'Warning!'}, {reason: 'Info!'}]
       }
     ]),
     'should support `quiet: true` on files with warnings'
@@ -146,16 +130,7 @@ test('reporterJson', async function () {
         path: 'a.js',
         cwd,
         history: ['a.js'],
-        messages: [
-          {
-            reason: 'Error!',
-            position: {
-              start: {line: null, column: null},
-              end: {line: null, column: null}
-            },
-            fatal: true
-          }
-        ]
+        messages: [{fatal: true, reason: 'Error!'}]
       }
     ]),
     'should support `quiet: true` on fatal files'
@@ -168,16 +143,7 @@ test('reporterJson', async function () {
         path: 'a.js',
         cwd,
         history: ['a.js'],
-        messages: [
-          {
-            reason: 'Error!',
-            position: {
-              start: {line: null, column: null},
-              end: {line: null, column: null}
-            },
-            fatal: true
-          }
-        ]
+        messages: [{fatal: true, reason: 'Error!'}]
       }
     ]),
     'should support `silent: true` on fatal files'
@@ -196,16 +162,7 @@ test('reporterJson', async function () {
         path: 'a.js',
         cwd,
         history: ['a.js'],
-        messages: [
-          {
-            reason: 'Error!',
-            position: {
-              start: {line: null, column: null},
-              end: {line: null, column: null}
-            },
-            fatal: true
-          }
-        ]
+        messages: [{fatal: true, reason: 'Error!'}]
       }
     ]),
     'should support a fatal message on a file'
@@ -223,12 +180,8 @@ test('reporterJson', async function () {
         history: ['a.js'],
         messages: [
           {
-            reason: 'Warning!',
-            position: {
-              start: {line: null, column: null},
-              end: {line: null, column: null}
-            },
-            fatal: false
+            fatal: false,
+            reason: 'Warning!'
           }
         ]
       }
@@ -265,16 +218,7 @@ test('reporterJson', async function () {
         path: 'a.js',
         cwd,
         history: ['a.js'],
-        messages: [
-          {
-            reason: 'Warning!',
-            position: {
-              start: {line: null, column: null},
-              end: {line: null, column: null}
-            },
-            fatal: false
-          }
-        ]
+        messages: [{fatal: false, reason: 'Warning!'}]
       }
     ]),
     'should work on files with warning messages'
@@ -292,16 +236,7 @@ test('reporterJson', async function () {
         path: 'a.js',
         cwd,
         history: ['a.js'],
-        messages: [
-          {
-            reason: 'Error!',
-            position: {
-              start: {line: null, column: null},
-              end: {line: null, column: null}
-            },
-            fatal: true
-          }
-        ]
+        messages: [{fatal: true, reason: 'Error!'}]
       }
     ]),
     'should work on files with fatal messages'
@@ -319,15 +254,7 @@ test('reporterJson', async function () {
         cwd,
         history: ['a.js'],
         messages: [
-          {
-            reason: 'Warning!',
-            position: {
-              start: {line: null, column: null},
-              end: {line: null, column: null}
-            },
-            fatal: false,
-            url: 'https://example.com'
-          }
+          {fatal: false, reason: 'Warning!', url: 'https://example.com'}
         ]
       }
     ]),
